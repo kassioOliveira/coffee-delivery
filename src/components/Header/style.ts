@@ -3,7 +3,6 @@ import { FaShoppingCart } from 'react-icons/fa'
 
 export const HeaderComponent = styled.header`
   height: 9.375rem;
-  border: 1px solid red;
   width: 100%;
   display: flex;
   justify-content: space-around;
