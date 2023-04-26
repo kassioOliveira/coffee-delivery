@@ -1,5 +1,6 @@
 import {
   Box,
+  CadsContainer,
   Cart,
   Coffe,
   HomeArticle,
@@ -9,6 +10,9 @@ import {
 } from './style'
 
 import post from '../../assets/Imagem.coffee_delivery.svg'
+import { Card } from '../../components/Card'
+
+import { coffees } from '../../coffees/index'
 
 export default function Home() {
   return (
@@ -51,6 +55,27 @@ export default function Home() {
           <img src={post} alt="copo-de-café" />
         </HomeArticle>
       </section>
+
+      <CadsContainer>
+        <section>
+          <h2>Nossos cafés</h2>
+          <div>
+            {coffees.map((coffe) => {
+              return (
+                <Card
+                  key={coffe.id}
+                  src={coffe.srcImg}
+                  alt=""
+                  tags={coffe.tags}
+                  description={coffe.description}
+                  title={coffe.title}
+                  price={coffe.price}
+                />
+              )
+            })}
+          </div>
+        </section>
+      </CadsContainer>
     </HomeContainer>
   )
 }

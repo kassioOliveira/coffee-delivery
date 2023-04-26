@@ -3,8 +3,8 @@ import { FaBoxOpen, FaShoppingCart } from 'react-icons/fa'
 import { RiTimerFill } from 'react-icons/ri'
 import { FiCoffee } from 'react-icons/fi'
 
-export const HomeContainer = styled.div`
-  margin-top: 1.125rem;
+export const HomeContainer = styled.main`
+  margin-top: 10rem;
   width: 100%;
   position: relative;
 `
@@ -65,13 +65,8 @@ export const HomeArticle = styled.article`
       line-height: 1.5;
       font-size: 3rem;
 
-      @media (max-width: 992px) {
-        width: 90%;
-        font-size: 2.5rem;
-      }
-
       @media (max-width: 576px) {
-        font-size: 1.25rem;
+        font-size: 2rem;
       }
     }
 
@@ -175,5 +170,28 @@ export const Coffe = styled(FiCoffee)`
   }
   @media (max-width: 992px) {
     font-size: 0.8rem;
+  }
+`
+
+export const CadsContainer = styled.div`
+  padding: 10px;
+
+  section {
+    margin: 0 auto;
+    width: 90%;
+  }
+
+  section > div {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
+    gap: 50px;
+    padding: 30px 0;
+  }
+
+  h2 {
+    color: ${(props) => props.theme['base-title']};
+    margin-bottom: 20px;
   }
 `
