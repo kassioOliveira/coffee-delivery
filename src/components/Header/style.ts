@@ -2,11 +2,16 @@ import styled from 'styled-components'
 import { FaShoppingCart } from 'react-icons/fa'
 
 export const HeaderComponent = styled.header`
+  background: ${(props) => props.theme.background};
   height: 9.375rem;
   width: 100%;
+  position: fixed;
+  top: 0;
   display: flex;
   justify-content: space-around;
   align-items: center;
+  z-index: 100;
+  overflow: hidden;
   @media (max-width: 768px) {
     height: 6.25rem;
   }
