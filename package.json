@@ -10,10 +10,13 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@hookform/resolvers": "^3.1.0",
     "@types/react-icons": "^3.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-icons": "^4.8.0"
+    "react-hook-form": "^7.43.9",
+    "react-icons": "^4.8.0",
+    "zod": "^3.21.4"
   },
   "devDependencies": {
     "@rocketseat/eslint-config": "^1.2.0",
