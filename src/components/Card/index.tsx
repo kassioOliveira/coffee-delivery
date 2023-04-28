@@ -1,5 +1,6 @@
 import { ImgHTMLAttributes } from 'react'
-import { CardCart, CardContainer, Minus, Plus } from './style'
+import { CardCart, CardContainer } from './style'
+import { DoubleButton } from '../DoubleButton'
 
 interface ImgCard extends ImgHTMLAttributes<HTMLImageElement> {
   img?: any
@@ -39,15 +40,7 @@ export function Card({
             R$
             <strong>{price}</strong>
           </span>
-          <div>
-            <button type="button">
-              <Minus />
-            </button>
-            <strong>1</strong>
-            <button type="button">
-              <Plus />
-            </button>
-          </div>
+          <DoubleButton />
           <button type="button">
             <CardCart />
           </button>

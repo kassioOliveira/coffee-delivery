@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { FaMinus, FaPlus, FaShoppingCart } from 'react-icons/fa'
+import { FaShoppingCart } from 'react-icons/fa'
 
 export const CardContainer = styled.article`
   background: ${(props) => props.theme['base-card']};
@@ -77,26 +77,7 @@ export const CardContainer = styled.article`
       }
     }
 
-    span + div {
-      background: ${(props) => props.theme['base-button']};
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1px 5px;
-      border-radius: 10%;
-      button {
-        background: transparent;
-        border: none;
-
-        padding: 8px 5px;
-
-        cursor: pointer;
-      }
-    }
-  }
-
-  footer > div {
-    div + button {
+    > button {
       border: none;
       padding: 10px;
       border-radius: 10px;
@@ -116,20 +97,4 @@ export const CardCart = styled(FaShoppingCart)`
   font-size: 1.2rem;
 
   color: ${(props) => props.theme.white};
-`
-
-export const Minus = styled(FaMinus)`
-  font-size: 12px;
-  color: ${(props) => props.theme.purple};
-  &:hover {
-    color: ${(props) => props.theme['purple-dark']};
-  }
-`
-
-export const Plus = styled(FaPlus)`
-  font-size: 12px;
-  color: ${(props) => props.theme.purple};
-  &:hover {
-    color: ${(props) => props.theme['purple-dark']};
-  }
 `
