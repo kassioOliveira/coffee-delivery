@@ -89,6 +89,10 @@ export const CardContainer = styled.article`
       &:hover {
         background: ${(props) => props.theme.purple};
       }
+      &:disabled {
+        opacity: 0.7;
+        cursor: not-allowed;
+      }
     }
   }
 `
