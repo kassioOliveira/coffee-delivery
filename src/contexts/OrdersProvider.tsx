@@ -1,4 +1,6 @@
-import { createContext, useReducer, ReactNode } from 'react'
+import { createContext, useReducer, ReactNode, useEffect } from 'react'
+import { getNewOrderInfo } from '../utils/get-new-order-info'
+import { toast } from 'react-toastify'
 
 export type CoffeeType = {
   title: string
@@ -23,6 +25,19 @@ interface OrderProps {
   district: string
 }
 
+type OrderData = {
+  CEP: string
+  road: string
+  number: string
+  complement: string
+  district: string
+  city: string
+  estate: string
+  date: string
+  id: string
+  paymentPreference: string
+}
+
 interface OrdersContextProps {
   orders: OrderProps[]
   cart: CoffeeType[]
@@ -32,7 +47,7 @@ interface OrdersContextProps {
   addCoffeeToCart: (coffee: CoffeeType, amount: number) => void
   updateAmountItemCart: (coffee: CoffeeType, amount: number) => void
   removeCoffeeFromCart: (coffeeId: string) => void
-  //  completeCurrentOrder: (orderData: OrderData) => void;
+  completeCurrentOrder: (orderData: OrderData) => void
 }
 
 interface CurrentOrder {
@@ -40,11 +55,6 @@ interface CurrentOrder {
   totalPrice: number
   deliveryPrice: number
   productsPrice: number
-}
-
-interface OrdersState {
-  orders: []
-  currentOrder: CurrentOrder
 }
 
 export const OrdersContext = createContext({} as OrdersContextProps)
@@ -68,14 +78,13 @@ export const OrdersProvider = ({ children }: OrdersContextProviderProps) => {
 
           newCart.push(action.payload)
 
+          const newCurrentOrder = getNewOrderInfo(newCart)
+          toast.success('Café adicionando ao carrinho com sucesso!', {
+            toastId: 'success1',
+          })
           return {
             orders,
-            currentOrder: {
-              cart: newCart,
-              totalPrice: 0,
-              deliveryPrice: 0,
-              productsPrice: 0,
-            },
+            currentOrder: newCurrentOrder,
           }
         }
         case 'UPDATE_AMOUNT_ITEM_CART': {
@@ -92,14 +101,11 @@ export const OrdersProvider = ({ children }: OrdersContextProviderProps) => {
             }
           })
 
+          const newCurrentOrder = getNewOrderInfo(newCart)
+
           return {
             orders,
-            currentOrder: {
-              cart: newCart,
-              totalPrice: 0,
-              deliveryPrice: 0,
-              productsPrice: 0,
-            },
+            currentOrder: newCurrentOrder,
           }
         }
         case 'REMOVE_ITEM_FROM_CART': {
@@ -111,16 +117,39 @@ export const OrdersProvider = ({ children }: OrdersContextProviderProps) => {
             return coffee.id !== action.payload.id
           })
 
+          const newCurrentOrder = getNewOrderInfo(newCart)
+          toast.success('Café removido do carrinho com sucesso!', {
+            toastId: 'removed1',
+          })
           return {
             orders,
+            currentOrder: newCurrentOrder,
+          }
+        }
+        case 'CONFIRM_ORDER': {
+          const { orders, currentOrder } = state
+
+          const { cart, totalPrice } = currentOrder
+
+          const newCompleteOrder = {
+            cart,
+            totalPrice,
+            ...action.payload.orderData,
+          }
+
+          return {
+            orders: [...orders, newCompleteOrder],
             currentOrder: {
-              cart: newCart,
+              cart: [],
               totalPrice: 0,
               deliveryPrice: 0,
               productsPrice: 0,
             },
           }
         }
+
+        default:
+          return state
       }
     },
     {
@@ -132,7 +161,38 @@ export const OrdersProvider = ({ children }: OrdersContextProviderProps) => {
         productsPrice: 0,
       },
     },
+
+    () => {
+      const storedStateAsJSON = localStorage.getItem('@coffee-delivery/orders')
+
+      if (storedStateAsJSON) {
+        return JSON.parse(storedStateAsJSON)
+      }
+
+      return {
+        orders: [],
+        currentOrder: {
+          cart: [],
+          totalPrice: 0,
+          deliveryPrice: 0,
+          productsPrice: 0,
+        },
+      }
+    },
   )
+
+  useEffect(() => {
+    const stateJSON = JSON.stringify(ordersState)
+
+    localStorage.setItem('@coffee-delivery/orders', stateJSON)
+  }, [ordersState])
+
+  const { orders } = ordersState as { orders: OrderProps[] }
+  const { currentOrder } = ordersState as {
+    currentOrder: CurrentOrder
+  }
+
+  const { cart, deliveryPrice, productsPrice, totalPrice } = currentOrder
 
   function addCoffeeToCart(coffee: CoffeeType, amount: number) {
     dispatch({
@@ -163,13 +223,28 @@ export const OrdersProvider = ({ children }: OrdersContextProviderProps) => {
     })
   }
 
+  function completeCurrentOrder(orderData: OrderData) {
+    dispatch({
+      type: 'CONFIRM_ORDER',
+      payload: {
+        cart,
+        orderData,
+      },
+    })
+  }
+
   return (
     <OrdersContext.Provider
       value={{
+        orders,
         addCoffeeToCart,
         updateAmountItemCart,
         removeCoffeeFromCart,
-        cart: ordersState?.currentOrder.cart,
+        completeCurrentOrder,
+        cart,
+        deliveryPrice,
+        productsPrice,
+        totalPrice,
       }}
     >
       {children}
