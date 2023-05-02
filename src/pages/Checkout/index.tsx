@@ -44,7 +44,10 @@ export function Checkout() {
     <CheckoutContainer>
       <FormProvider {...newAddressFormData}>
         <div>
-          <Address method={paymentMethod} />
+          <Address
+            method={paymentMethod}
+            handlePaymentMethod={handlePaymentMethod}
+          />
           <PaymentOptions
             handlePaymentMethod={handlePaymentMethod}
             method={paymentMethod}
