@@ -56,6 +56,18 @@ export const SelectedCoffeesContainer = styled.div`
       > div:first-child {
         height: 60%;
         overflow: auto;
+        position: relative;
+
+        > h2 {
+          height: fit-content;
+          position: absolute;
+          text-align: center;
+          top: 0;
+          right: 0;
+          left: 0;
+          bottom: 0;
+          margin: auto;
+        }
       }
     }
   }

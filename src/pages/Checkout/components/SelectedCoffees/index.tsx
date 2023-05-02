@@ -21,7 +21,7 @@ export default function SelectedCoffes() {
                 return <CardCheckout item={item} key={item.id} />
               })
             ) : (
-              <h2>Sem items no carrinho</h2>
+              <h2>Não há itens no carrinho</h2>
             )}
           </div>
 
