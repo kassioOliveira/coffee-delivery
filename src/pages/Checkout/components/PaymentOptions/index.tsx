@@ -5,10 +5,16 @@ import {
   Cash,
   CreditCard,
   Money,
+  PaymentMethodButton,
   PaymentOptionsContainer,
 } from './style'
 
-export function PaymentOptions() {
+interface PaymentProps {
+  handlePaymentMethod: (method: string) => void
+  method: string
+}
+
+export function PaymentOptions({ handlePaymentMethod, method }: PaymentProps) {
   const size = useWindowSize()
   return (
     <PaymentOptionsContainer>
@@ -20,17 +26,32 @@ export function PaymentOptions() {
       </div>
 
       <ButtonsContainer>
-        <button type="button" title="Cartão de crédito">
+        <PaymentMethodButton
+          type="button"
+          title="Cartão de crédito"
+          selected={method === 'crédito'}
+          onClick={() => handlePaymentMethod('crédito')}
+        >
           <CreditCard />
           {size.width && (size.width > 575 ? 'Cartão de crédito' : '')}
-        </button>
-        <button type="button" title="Cartão de débito">
+        </PaymentMethodButton>
+        <PaymentMethodButton
+          type="button"
+          title="Cartão de débito"
+          selected={method === 'débito'}
+          onClick={() => handlePaymentMethod('débito')}
+        >
           <Bank /> {size.width && (size.width > 575 ? 'Cartão de débito' : '')}
-        </button>
-        <button type="button" title="Dinheiro">
+        </PaymentMethodButton>
+        <PaymentMethodButton
+          type="button"
+          title="Dinheiro"
+          selected={method === 'Dinheiro'}
+          onClick={() => handlePaymentMethod('Dinheiro')}
+        >
           <Cash />
           {size.width && (size.width > 575 ? 'Dinheiro' : '')}
-        </button>
+        </PaymentMethodButton>
       </ButtonsContainer>
     </PaymentOptionsContainer>
   )

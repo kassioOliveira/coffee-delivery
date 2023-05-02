@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 import { BsBank, BsCash } from 'react-icons/bs'
 import { CiCreditCard1 } from 'react-icons/ci'
@@ -42,36 +42,48 @@ export const ButtonsContainer = styled.div`
   align-items: center;
   padding: 0 5px;
 
-  > button {
-    border: none;
-    padding: 15px 5px;
-    width: 32%;
-    height: 80%;
-    border-radius: 8px;
-    font-size: 0.7rem;
-    justify-content: left;
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    text-transform: uppercase;
-    text-align: left;
-    cursor: pointer;
-    background: ${(props) => props.theme['base-button']};
-    color: ${(props) => props.theme['base-text']};
-
-    &:hover {
-      background: ${(props) => props.theme['base-hover']};
-    }
-
-    @media (max-width: 576px) {
-      justify-content: center;
-    }
-  }
-
   > button:first-child {
     padding: 15px 0px;
     text-align: left;
     gap: 0;
+  }
+`
+interface ButtonProp {
+  selected: boolean
+}
+
+export const PaymentMethodButton = styled.button.attrs((props: ButtonProp) => ({
+  selected: props.selected,
+}))<ButtonProp>`
+  border: 1px solid transparent;
+  padding: 15px 5px;
+  width: 32%;
+  height: 80%;
+  border-radius: 8px;
+  font-size: 0.7rem;
+  justify-content: left;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  text-transform: uppercase;
+  text-align: left;
+  cursor: pointer;
+  background: ${(props) => props.theme['base-button']};
+  color: ${(props) => props.theme['base-text']};
+
+  &:hover {
+    background: ${(props) => props.theme['base-hover']};
+  }
+
+  ${(props) =>
+    props.selected &&
+    css`
+      border-color: ${(props) => props.theme.purple};
+      background: ${(props) => props.theme['base-hover']};
+    `}
+
+  @media (max-width: 576px) {
+    justify-content: center;
   }
 `
 
