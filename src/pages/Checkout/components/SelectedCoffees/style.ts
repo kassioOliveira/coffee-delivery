@@ -110,6 +110,11 @@ export const Overview = styled.div`
     color: ${(props) => props.theme.white};
     background: ${(props) => props.theme.yellow};
 
+    &:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+    }
+
     @media (max-width: 576px) {
       margin-top: 10px;
       padding: 10px;
