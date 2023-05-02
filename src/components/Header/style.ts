@@ -45,17 +45,18 @@ export const HeaderComponent = styled.header`
       border-radius: 5px;
       @media (max-width: 1024px) {
         font-size: 1rem;
-        padding: 5px;
+        padding: 10px;
         gap: 2px;
       }
       @media (max-width: 992px) {
         font-size: 0.8rem;
         padding: 2px;
+        padding-right: 7px;
         gap: 2px;
       }
     }
 
-    span {
+    a {
       background: ${(props) => props.theme['yellow-light']};
       padding: 10px;
       border-radius: 5px;
