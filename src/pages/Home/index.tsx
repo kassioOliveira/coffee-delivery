@@ -61,17 +61,7 @@ export default function Home() {
           <h2>Nossos cafés</h2>
           <div>
             {coffees.map((coffe) => {
-              return (
-                <Card
-                  key={coffe.id}
-                  src={coffe.srcImg}
-                  alt=""
-                  tags={coffe.tags}
-                  description={coffe.description}
-                  title={coffe.title}
-                  price={coffe.price}
-                />
-              )
+              return <Card coffee={coffe} key={coffe.id} />
             })}
           </div>
         </section>
