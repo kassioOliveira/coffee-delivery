@@ -137,6 +137,8 @@ export const OrdersProvider = ({ children }: OrdersContextProviderProps) => {
             ...action.payload.orderData,
           }
 
+          window.location.href = '/success'
+
           return {
             orders: [...orders, newCompleteOrder],
             currentOrder: {
