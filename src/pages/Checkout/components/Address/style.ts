@@ -135,10 +135,6 @@ export const StateInput = styled(InputBase)`
 export const CityInput = styled(InputBase)`
   width: 70%;
   color: ${(props) => props.theme['base-subtitle']};
-
-  /* @media (max-width: 576px) {
-    width: 50%;
-  } */
 `
 
 export const DeliveryAddress = styled(CiLocationOn)`

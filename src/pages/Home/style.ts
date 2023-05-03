@@ -3,9 +3,7 @@ import { FaBoxOpen, FaShoppingCart } from 'react-icons/fa'
 import { RiTimerFill } from 'react-icons/ri'
 import { FiCoffee } from 'react-icons/fi'
 
-export const HomeContainer = styled.main`
-  margin-top: 10rem;
-  width: 100%;
+export const HomeContainer = styled.div`
   position: relative;
 `
 

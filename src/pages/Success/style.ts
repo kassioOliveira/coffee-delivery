@@ -4,9 +4,7 @@ import { CiLocationOn } from 'react-icons/ci'
 import { RiTimerFill } from 'react-icons/ri'
 import { TfiMoney } from 'react-icons/tfi'
 
-export const SuccessContainer = styled.main`
-  margin-top: 9.375rem;
-
+export const SuccessContainer = styled.div`
   section {
     display: flex;
     justify-content: center;

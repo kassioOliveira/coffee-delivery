@@ -1,7 +1,6 @@
 import styled from 'styled-components'
 
-export const CheckoutContainer = styled.main`
-  margin-top: 10rem;
+export const CheckoutContainer = styled.div`
   height: fit-content;
   display: flex;
   flex-direction: row;
